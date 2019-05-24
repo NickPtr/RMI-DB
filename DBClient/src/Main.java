@@ -27,8 +27,11 @@ public class Main {
                 look_op.BookChecker( );
                 String flag = look_op.Confirm();
                 System.out.println(flag);
-               
+                Choise choise = new Choise();
+                choise.setVisible(true);
+
                 }
+    
     }
     
 
