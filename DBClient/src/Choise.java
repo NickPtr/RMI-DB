@@ -1,4 +1,6 @@
 
+import java.awt.Toolkit;
+import java.awt.event.*;
 import javax.swing.*;
 
 /*
@@ -25,7 +27,7 @@ public class Choise extends JFrame {
         CheckEvaluate = new JCheckBox();
         Submit = new JToggleButton();
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setText("MyMusic");
@@ -37,8 +39,8 @@ public class Choise extends JFrame {
         CheckEvaluate.setText("Evaluate Music");
 
         Submit.setText("Submit");
-        Submit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        Submit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 SubmitActionPerformed(evt);
             }
         });
@@ -77,30 +79,36 @@ public class Choise extends JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
+    }     
+    
+    public void close() {
+        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+    }
 
-    private void SubmitActionPerformed(java.awt.event.ActionEvent evt) {                                       
+    private void SubmitActionPerformed(ActionEvent evt) {                                       
         if(CheckInsert.isSelected())
         {
             new Insert().setVisible(true);
+            close();
         }
         else if(CheckSearch.isSelected())
         {
-            new Search.setVisible(true);
+            new Search().setVisible(true);
         }
         else if (CheckEvaluate.isSelected())
         {
-            new Evaluate.setVisible(true);
+            new Evaluate().setVisible(true);
         }
         else
         {
+            CheckSearch.setSelected(false);
+            CheckInsert.setSelected(false);
+            CheckEvaluate.setSelected(false);
             JOptionPane.showMessageDialog(this, "Something went wrong!\nPlease try again!");
         }    
     }                                      
 
-    public static void main(String args[]) {
-        new NewJFrame().setVisible(true);
-    }
 
                     
     private JCheckBox CheckEvaluate;
