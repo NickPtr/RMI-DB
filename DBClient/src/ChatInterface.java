@@ -12,5 +12,7 @@ public interface ChatInterface extends Remote {
     public String update(String name) throws RemoteException;
     
     public String update(String name, String ok) throws RemoteException;
+    
+    public String update(String name, Integer ok) throws RemoteException;
 
 }

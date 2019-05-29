@@ -42,8 +42,8 @@ public class ChatRMIServer extends UnicastRemoteObject implements ChatInterface 
     
     public void sendRating(ChatMessage msg, String name) throws RemoteException {
         try {
-            repeats=repeats+msg.getRepeats();
-            rate=rate+msg.getRating()/repeats;
+            repeats=msg.getRepeats();
+            rate=(rate+msg.getRating())/repeats;
             
             System.out.println(rate+"\t"+repeats);
             String message = "UPDATE messages SET rating = " + rate + " WHERE title='"+ name + "'";
@@ -59,6 +59,33 @@ public class ChatRMIServer extends UnicastRemoteObject implements ChatInterface 
         ResultSet records = null;
         try {
             records = stat.executeQuery("SELECT * from messages");
+        } catch (SQLException ex) {
+            Logger.getLogger(ChatRMIServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String tilte, type, singer, time;
+        int rating;
+        String str = "";
+        try {
+            while (records.next()) {
+                tilte= records.getString("title");
+                type = records.getString("type");
+                singer = records.getString("singer");
+                time = records.getString("time");
+                rating = records.getInt("rating");
+                
+                str = str + tilte + "\t" + type + "\t" + singer + "\t" + time + "\t" + rating +"\n";
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ChatRMIServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return str;
+    }
+    
+    
+    public String update(String name, Integer ok) throws RemoteException {
+        ResultSet records = null;
+        try {
+            records = stat.executeQuery("SELECT * from messages WHERE rating='"+ ok + "'");
         } catch (SQLException ex) {
             Logger.getLogger(ChatRMIServer.class.getName()).log(Level.SEVERE, null, ex);
         }

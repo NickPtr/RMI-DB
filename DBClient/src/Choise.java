@@ -29,6 +29,7 @@ public class Choise extends JFrame {
         CheckInsert = new JCheckBox();
         CheckSearch = new JCheckBox();
         CheckEvaluate = new JCheckBox();
+        CheckAverage = new JCheckBox();
         Submit = new JToggleButton();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -41,6 +42,8 @@ public class Choise extends JFrame {
         CheckSearch.setText("Search Music");
 
         CheckEvaluate.setText("Evaluate Music");
+        
+        CheckAverage.setText("Print Average");
 
         Submit.setText("Submit");
         Submit.addActionListener(new ActionListener() {
@@ -64,7 +67,9 @@ public class Choise extends JFrame {
                             .addComponent(Submit, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(CheckSearch, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
-                        .addComponent(CheckEvaluate)))
+                        .addComponent(CheckEvaluate)
+                        .addGap(177, 177, 177)
+                        .addComponent(CheckAverage)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -76,7 +81,8 @@ public class Choise extends JFrame {
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(CheckInsert)
                     .addComponent(CheckSearch)
-                    .addComponent(CheckEvaluate))
+                    .addComponent(CheckEvaluate)
+                    .addComponent(CheckAverage))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(Submit)
                 .addContainerGap())
@@ -106,6 +112,11 @@ public class Choise extends JFrame {
             new Evaluate(look_op,repeats).setVisible(true);
             close();
         }
+        else if (CheckAverage.isSelected())
+        {
+            new Average(look_op,repeats).setVisible(true);
+            close();
+        }
         else
         {
             CheckSearch.setSelected(false);
@@ -120,6 +131,7 @@ public class Choise extends JFrame {
     private JCheckBox CheckEvaluate;
     private JCheckBox CheckInsert;
     private JCheckBox CheckSearch;
+    private JCheckBox CheckAverage;
     private JToggleButton Submit;
     private JLabel jLabel1;                  
 }

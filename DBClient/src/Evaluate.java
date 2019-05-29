@@ -153,9 +153,11 @@ public class Evaluate extends JFrame {
     private void SubmitButtonActionPerformed(ActionEvent evt) {                                             
         try {
             // TODO add your handling code here:
-            repeats++;
+           repeats++;
             System.out.println(repeats);
             look_op.sendRating(new ChatMessage(Integer.parseInt(Rating.getText()),repeats),Search.getText());
+            
+            System.out.println("META -> "+repeats);
             
         } catch (RemoteException ex) {
             Logger.getLogger(Evaluate.class.getName()).log(Level.SEVERE, null, ex);
