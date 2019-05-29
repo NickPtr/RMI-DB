@@ -1,6 +1,9 @@
 
 import java.awt.Toolkit;
 import java.awt.event.*;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /*
@@ -16,7 +19,11 @@ import javax.swing.*;
 public class Insert extends JFrame {
 
  
-    public Insert() {
+    ChatInterface look_op;
+    int repeats;
+    public Insert(ChatInterface look_op,Integer repeats) {
+        this.look_op=look_op;
+        this.repeats=repeats;
         Graphics();
     }
                          
@@ -133,13 +140,22 @@ public class Insert extends JFrame {
     }
 
     private void BackActionPerformed(ActionEvent evt) {                                     
-        new Choise().setVisible(true);
+        new Choise(look_op,repeats).setVisible(true);
         close();
     }                                    
 
     private void SubmitActionPerformed(ActionEvent evt) {                                       
-        //sent to the DB
-        
+        try {
+            //sent to the DB
+            look_op.sendMessage(new ChatMessage(Title.getText(),Type.getText(),Singer.getText(),Time.getText(),repeats));
+            JOptionPane.showMessageDialog(this, "Your insert has been completed!");
+            close();
+            Choise choise = new Choise(look_op,repeats);
+            choise.setVisible(true);
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(Insert.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }                                      
 

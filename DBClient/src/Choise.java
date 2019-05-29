@@ -15,7 +15,11 @@ import javax.swing.*;
  */
 public class Choise extends JFrame {
 
-    public Choise() {
+    ChatInterface look_op;
+    int repeats;
+    public Choise(ChatInterface look_op,Integer repeats) {
+        this.look_op=look_op;
+        this.repeats=repeats;
         Graphics();
     }
                       
@@ -89,16 +93,18 @@ public class Choise extends JFrame {
     private void SubmitActionPerformed(ActionEvent evt) {                                       
         if(CheckInsert.isSelected())
         {
-            new Insert().setVisible(true);
+            new Insert(look_op,repeats).setVisible(true);
             close();
         }
         else if(CheckSearch.isSelected())
         {
-            new Search().setVisible(true);
+            new Search(look_op,repeats).setVisible(true);
+            close();
         }
         else if (CheckEvaluate.isSelected())
         {
-            new Evaluate().setVisible(true);
+            new Evaluate(look_op,repeats).setVisible(true);
+            close();
         }
         else
         {

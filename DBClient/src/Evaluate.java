@@ -1,5 +1,9 @@
 
+import java.awt.Toolkit;
 import java.awt.event.*;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /*
@@ -14,7 +18,11 @@ import javax.swing.*;
  */
 public class Evaluate extends JFrame {
 
-    public Evaluate() {
+    ChatInterface look_op;
+    Integer repeats;
+    public Evaluate(ChatInterface look_op, Integer repeats) {
+        this.look_op=look_op;
+        this.repeats=repeats;
         Graphics();
     }
                           
@@ -46,6 +54,7 @@ public class Evaluate extends JFrame {
         Result.setEditable(false);
         Result.setColumns(20);
         Result.setRows(5);
+        Result.append("Title\tType\tSinger\tTime(in sec)\tRating\n");
         jScrollPane1.setViewportView(Result);
 
         SearchButton.setText("Search");
@@ -121,14 +130,41 @@ public class Evaluate extends JFrame {
         );
 
         pack();
-    }                                                            
+    }        
+    
+    
+    public void close() {
+        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+    }
 
     private void SearchButtonActionPerformed(ActionEvent evt) {                                             
         // TODO add your handling code here:
+        
+        try {
+            // TODO add your handling code here:
+            System.out.println(look_op.update());
+            Result.append(look_op.update(Search.getText()));
+        } catch (RemoteException ex) {
+            Logger.getLogger(Result.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }                                            
 
     private void SubmitButtonActionPerformed(ActionEvent evt) {                                             
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            repeats++;
+            System.out.println(repeats);
+            look_op.sendRating(new ChatMessage(Integer.parseInt(Rating.getText()),repeats),Search.getText());
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(Evaluate.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            JOptionPane.showMessageDialog(this, "Your rating has been completed!");
+            close();
+            Choise choise = new Choise(look_op,repeats);
+            choise.setVisible(true);
+        
     }                                            
 
                   

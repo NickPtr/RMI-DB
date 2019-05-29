@@ -21,13 +21,12 @@ public class Main {
     /**
      * @param args the command line arguments
      */
+    private static int repeats=0;
     public static void main(String[] args) throws NotBoundException, MalformedURLException, RemoteException {
-        Booking look_op = (Booking) Naming.lookup("//localhost/RMIServer");
+        ChatInterface look_op = (ChatInterface) Naming.lookup("//localhost/RMIServer");
                 
-                look_op.BookChecker( );
-                String flag = look_op.Confirm();
-                System.out.println(flag);
-                Choise choise = new Choise();
+               
+                Choise choise = new Choise(look_op,repeats);
                 choise.setVisible(true);
 
                 }

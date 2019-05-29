@@ -15,11 +15,15 @@ import javax.swing.*;
  */
 public class Search extends JFrame {
 
-    public Search() {
-        initComponents();
+    ChatInterface look_op;
+    int repeats;
+    public Search(ChatInterface look_op, Integer repeats) {
+        this.look_op=look_op;
+        this.repeats=repeats;
+        Graphics();
     }
                        
-    private void initComponents() {
+    private void Graphics() {
 
         jLabel1 = new JLabel();
         TitleSearch = new JTextField();
@@ -110,10 +114,14 @@ public class Search extends JFrame {
 
     private void SearchTitleActionPerformed(ActionEvent evt) {                                            
         // TODO add your handling code here:
+        close();
+        new Result(look_op, TitleSearch.getText(),"title",repeats).setVisible(true);
     }                                           
 
     private void SearchSingerActionPerformed(ActionEvent evt) {                                             
         // TODO add your handling code here:
+        close();
+        new Result(look_op, SingerSearch.getText(),"singer",repeats).setVisible(true);
     }                                            
 
                  

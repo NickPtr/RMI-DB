@@ -1,5 +1,9 @@
 
+import java.awt.Toolkit;
 import java.awt.event.*;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /*
@@ -14,8 +18,17 @@ import javax.swing.*;
  */
 public class Result extends JFrame {
 
-    public Result() {
+    ChatInterface look_op;
+    String search;
+    String ok;
+    int repeats;
+    public Result(ChatInterface look_op, String search, String ok,Integer repeats) {
+        this.look_op=look_op;
+        this.search=search;
+        this.repeats=repeats;
+        this.ok=ok;
         Graphics();
+        Append(search,ok);
     }
                        
     private void Graphics() {
@@ -25,7 +38,7 @@ public class Result extends JFrame {
         Result = new JTextArea();
         Done = new JToggleButton();
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setText("Results");
@@ -33,6 +46,7 @@ public class Result extends JFrame {
         Result.setEditable(false);
         Result.setColumns(20);
         Result.setRows(5);
+        Result.append("Title\tType\tSinger\tTime(in sec)\tRating\n");
         jScrollPane2.setViewportView(Result);
 
         Done.setText("Done");
@@ -69,10 +83,31 @@ public class Result extends JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
+    }                     
 
+    
+    public void close() {
+        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+    }
+    
+    private void Append(String search, String ok)
+    {
+        try {
+            // TODO add your handling code here:
+            System.out.println(look_op.update());
+            if(ok.equals("singer"))
+                Result.append(look_op.update(search,ok));
+            else
+                Result.append(look_op.update(search));
+        } catch (RemoteException ex) {
+            Logger.getLogger(Result.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void DoneActionPerformed(ActionEvent evt) {                                     
-        // TODO add your handling code here:
+        close();
+        new Choise(look_op,repeats).setVisible(true);
     }                                    
 
                   
