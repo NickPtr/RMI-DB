@@ -1,3 +1,5 @@
+/*Nikos Potaris
+  icsd15173*/
 
 import java.awt.Toolkit;
 import java.awt.event.*;
@@ -18,19 +20,20 @@ import javax.swing.*;
  */
 public class Result extends JFrame {
 
-    ChatInterface look_op;
+    //arxikopoihsi twn metablitwn "look_op", "repeats", "search" kai "ok" kai ekxorisei timwn se autes meso tou constructor
+    Interface look_op;
     String search;
     String ok;
     int repeats;
-    public Result(ChatInterface look_op, String search, String ok,Integer repeats) {
+    public Result(Interface look_op, String search, String ok,Integer repeats) {
         this.look_op=look_op;
         this.search=search;
         this.repeats=repeats;
         this.ok=ok;
-        Graphics();
-        Append(search,ok);
+        Graphics();//emfanisi twn grafikwn
+        Append(search,ok);//kaloume tin sinartisi "Append" gi tin emfanisi twn apotelesmatwn
     }
-                       
+    //sunartisi gia ta grafika     
     private void Graphics() {
 
         jLabel1 = new JLabel();
@@ -85,16 +88,16 @@ public class Result extends JFrame {
         pack();
     }                     
 
-    
+     //sunartisi gia to klisimo tis trexon selidas kata tin metafora stin epomeni
     public void close() {
         WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }
     
+    //sinartisi gia tin katalili emfanisi analoga me tin epilogi tou xristi
     private void Append(String search, String ok)
     {
         try {
-            // TODO add your handling code here:
             System.out.println(look_op.update());
             if(ok.equals("singer"))
                 Result.append(look_op.update(search,ok));
@@ -105,6 +108,7 @@ public class Result extends JFrame {
         }
     }
     
+    //metafora stin arxiki selida
     private void DoneActionPerformed(ActionEvent evt) {                                     
         close();
         new Choise(look_op,repeats).setVisible(true);

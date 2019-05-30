@@ -1,11 +1,14 @@
+/*Nikos Potaris
+  icsd15173*/
 
 import java.rmi.*;
 
-public interface ChatInterface extends Remote {
+// Interface gia tin xrisi ton ilopoihmenon apo ton Server sinartisewn
+public interface Interface extends Remote {
 
-    public void sendMessage(ChatMessage msg) throws RemoteException;
+    public void sendMessage(Message msg) throws RemoteException;
     
-    public void sendRating(ChatMessage msg, String name) throws RemoteException;
+    public void sendRating(Message msg, String name) throws RemoteException;
 
     public String update() throws RemoteException;
 

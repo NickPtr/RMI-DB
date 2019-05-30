@@ -1,8 +1,10 @@
+/*Nikos Potaris
+  icsd15173*/
 
 import java.io.Serializable;
-import java.util.Date;
 
-public class ChatMessage implements Serializable {
+//klasi gia tin metafora ton minimatwn-gia tin epikoinonia Client kai Server
+public class Message implements Serializable {
 
     private String title;
     private String type;
@@ -11,7 +13,7 @@ public class ChatMessage implements Serializable {
     private int rating;
     private int repeats;
 
-    public ChatMessage(String title, String type, String singer, String time, Integer repeats) {
+    public Message(String title, String type, String singer, String time, Integer repeats) {
         this.title = title;
         this.type = type;
         this.singer = singer;
@@ -19,7 +21,7 @@ public class ChatMessage implements Serializable {
         this.repeats=repeats;
     }
 
-    public ChatMessage(int rating, int repeats)
+    public Message(int rating, int repeats)
     {
         this.rating=rating;
         this.repeats=repeats;

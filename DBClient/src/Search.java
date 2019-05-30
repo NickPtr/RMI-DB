@@ -1,3 +1,5 @@
+/*Nikos Potaris
+  icsd15173*/
 
 import java.awt.Toolkit;
 import java.awt.event.*;
@@ -15,14 +17,15 @@ import javax.swing.*;
  */
 public class Search extends JFrame {
 
-    ChatInterface look_op;
+    //arxikopoihsi twn metablitwn "look_op" kai "repeats" kai ekxorisei timwn se autes meso tou constructor
+    Interface look_op;
     int repeats;
-    public Search(ChatInterface look_op, Integer repeats) {
+    public Search(Interface look_op, Integer repeats) {
         this.look_op=look_op;
         this.repeats=repeats;
-        Graphics();
+        Graphics();//emfanisi twn grafikwn
     }
-                       
+    //sunartisi gia ta grafika      
     private void Graphics() {
 
         jLabel1 = new JLabel();
@@ -107,19 +110,22 @@ public class Search extends JFrame {
         pack();
     }
     
+    //sunartisi gia to klisimo tis trexon selidas kata tin metafora stin epomeni
     public void close() {
         WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }
 
+    //Search me basi ton titlo tou tragoudiou kai metafora stin epomeni selida gia emfanisi
     private void SearchTitleActionPerformed(ActionEvent evt) {                                            
-        // TODO add your handling code here:
         close();
-        new Result(look_op, TitleSearch.getText(),"title",repeats).setVisible(true);
+        //pername sto Result ektos tou "look_op" kai tou "repeats", tin epilogi tou xristi kathos kai ena flag
+        //pou upodilonei ton tupo tis anazitisis
+        new Result(look_op, TitleSearch.getText(),"title",repeats).setVisible(true); 
     }                                           
 
+    //Search me basi to onoma tou kalitexni kai metafora stin epomeni selida gia emfanisi
     private void SearchSingerActionPerformed(ActionEvent evt) {                                             
-        // TODO add your handling code here:
         close();
         new Result(look_op, SingerSearch.getText(),"singer",repeats).setVisible(true);
     }                                            

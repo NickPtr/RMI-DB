@@ -1,3 +1,5 @@
+/*Nikos Potaris
+  icsd15173*/
 
 import java.awt.Toolkit;
 import java.awt.event.*;
@@ -18,15 +20,15 @@ import javax.swing.*;
  */
 public class Insert extends JFrame {
 
- 
-    ChatInterface look_op;
+    //arxikopoihsi twn metablitwn "look_op" kai "repeats" kai ekxorisei timwn se autes meso tou constructor
+    Interface look_op;
     int repeats;
-    public Insert(ChatInterface look_op,Integer repeats) {
+    public Insert(Interface look_op,Integer repeats) {
         this.look_op=look_op;
         this.repeats=repeats;
-        Graphics();
+        Graphics();//emfanisi twn grafikwn
     }
-                         
+    //sunartisi gia ta grafika                     
     private void Graphics() {
 
         jLabel1 = new JLabel();
@@ -134,20 +136,22 @@ public class Insert extends JFrame {
         pack();
     }
     
+    //sunartisi gia to klisimo tis trexon selidas kata tin metafora stin epomeni
     public void close() {
         WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }
 
+    //metafora stin proigoumeni selida
     private void BackActionPerformed(ActionEvent evt) {                                     
         new Choise(look_op,repeats).setVisible(true);
         close();
     }                                    
 
+    //apostoli sto Data Base kata to patima tou koumpiou "Submit"
     private void SubmitActionPerformed(ActionEvent evt) {                                       
         try {
-            //sent to the DB
-            look_op.sendMessage(new ChatMessage(Title.getText(),Type.getText(),Singer.getText(),Time.getText(),repeats));
+            look_op.sendMessage(new Message(Title.getText(),Type.getText(),Singer.getText(),Time.getText(),repeats));
             JOptionPane.showMessageDialog(this, "Your insert has been completed!");
             close();
             Choise choise = new Choise(look_op,repeats);

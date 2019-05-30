@@ -1,3 +1,5 @@
+/*Nikos Potaris
+  icsd15173*/
 
 import java.awt.Toolkit;
 import java.awt.event.*;
@@ -15,14 +17,16 @@ import javax.swing.*;
  */
 public class Choise extends JFrame {
 
-    ChatInterface look_op;
+    //arxikopoihsi twn metablitwn "look_op" kai "repeats" kai ekxorisei timwn se autes meso tou constructor
+    Interface look_op;
     int repeats;
-    public Choise(ChatInterface look_op,Integer repeats) {
+    public Choise(Interface look_op,Integer repeats) {
         this.look_op=look_op;
         this.repeats=repeats;
-        Graphics();
+        Graphics();//emfanisi twn grafikwn
     }
-                      
+                     
+    //sunartisi gia ta grafika
     private void Graphics() {
 
         jLabel1 = new JLabel();
@@ -91,11 +95,13 @@ public class Choise extends JFrame {
         pack();
     }     
     
+    //sunartisi gia to klisimo tis trexon selidas kata tin metafora stin epomeni
     public void close() {
         WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }
 
+    //metafora se epomeni selida analoga me tin epilogi tou xristi
     private void SubmitActionPerformed(ActionEvent evt) {                                       
         if(CheckInsert.isSelected())
         {
@@ -119,15 +125,11 @@ public class Choise extends JFrame {
         }
         else
         {
-            CheckSearch.setSelected(false);
-            CheckInsert.setSelected(false);
-            CheckEvaluate.setSelected(false);
             JOptionPane.showMessageDialog(this, "Something went wrong!\nPlease try again!");
         }    
     }                                      
 
-
-                    
+           
     private JCheckBox CheckEvaluate;
     private JCheckBox CheckInsert;
     private JCheckBox CheckSearch;

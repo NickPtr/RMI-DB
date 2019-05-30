@@ -1,5 +1,6 @@
 
-
+/*Nikos Potaris
+  icsd15173*/
 import java.awt.Toolkit;
 import java.awt.event.*;
 import java.rmi.RemoteException;
@@ -19,14 +20,16 @@ import javax.swing.*;
  */
 public class Average extends JFrame {
 
-    ChatInterface look_op;
+    //arxikopoihsi twn metablitwn "look_op" kai "repeats" kai ekxorisei timwn se autes meso tou constructor
+    Interface look_op;
     Integer repeats;
-    public Average(ChatInterface look_op, Integer repeats) {
+    public Average(Interface look_op, Integer repeats) {
         this.look_op=look_op;
         this.repeats=repeats;
-        Graphics();
+        Graphics();//emfanisi twn grafikwn
     }
-                        
+    
+    //sunartisi gia ta grafika
     private void Graphics() {
 
         jScrollPane1 = new JScrollPane();
@@ -42,6 +45,7 @@ public class Average extends JFrame {
         Result.setEditable(false);
         Result.setColumns(20);
         Result.setRows(5);
+        Result.append("Title\tType\tSinger\tTime(in sec)\tRating\n");
         jScrollPane1.setViewportView(Result);
 
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -104,23 +108,23 @@ public class Average extends JFrame {
         pack();
     }                    
 
+    //sunartisi gia to klisimo tis trexon selidas kata tin metafora stin epomeni
     public void close() {
         WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }
     
+    //emfanisi ton apotelesmatwn ston xristi analoga me ton meso oro pou exei eisagei
     private void GoActionPerformed(ActionEvent evt) {                                   
         try {
-            // TODO add your handling code here:
-
             Result.append(look_op.update(Avg.getText(),Integer.parseInt(Avg.getText())));
         } catch (RemoteException ex) {
             Logger.getLogger(Average.class.getName()).log(Level.SEVERE, null, ex);
         }
     }                                  
 
+    //metafora stin arxiki selida
     private void DoneActionPerformed(ActionEvent evt) {                                     
-        // TODO add your handling code here:
         close();
         Choise choise = new Choise(look_op,repeats);
         choise.setVisible(true);

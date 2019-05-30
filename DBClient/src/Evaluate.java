@@ -1,3 +1,5 @@
+/*Nikos Potaris
+  icsd15173*/
 
 import java.awt.Toolkit;
 import java.awt.event.*;
@@ -18,14 +20,16 @@ import javax.swing.*;
  */
 public class Evaluate extends JFrame {
 
-    ChatInterface look_op;
+    //arxikopoihsi twn metablitwn "look_op" kai "repeats" kai ekxorisei timwn se autes meso tou constructor
+    Interface look_op;
     Integer repeats;
-    public Evaluate(ChatInterface look_op, Integer repeats) {
+    public Evaluate(Interface look_op, Integer repeats) {
         this.look_op=look_op;
         this.repeats=repeats;
-        Graphics();
+        Graphics();//emfanisi twn grafikwn
     }
-                          
+    
+    //sunartisi gia ta grafika
     private void Graphics() {
 
         jLabel1 = new JLabel();
@@ -132,17 +136,15 @@ public class Evaluate extends JFrame {
         pack();
     }        
     
-    
+    //sunartisi gia to klisimo tis trexon selidas kata tin metafora stin epomeni
     public void close() {
         WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }
 
-    private void SearchButtonActionPerformed(ActionEvent evt) {                                             
-        // TODO add your handling code here:
-        
+    //emfanisi twn apotelesmaton ston xristi
+    private void SearchButtonActionPerformed(ActionEvent evt) {
         try {
-            // TODO add your handling code here:
             System.out.println(look_op.update());
             Result.append(look_op.update(Search.getText()));
         } catch (RemoteException ex) {
@@ -150,14 +152,12 @@ public class Evaluate extends JFrame {
         }
     }                                            
 
+    //apostoli tou rating pou ekane o xristis sto Data Base
     private void SubmitButtonActionPerformed(ActionEvent evt) {                                             
         try {
-            // TODO add your handling code here:
            repeats++;
             System.out.println(repeats);
-            look_op.sendRating(new ChatMessage(Integer.parseInt(Rating.getText()),repeats),Search.getText());
-            
-            System.out.println("META -> "+repeats);
+            look_op.sendRating(new Message(Integer.parseInt(Rating.getText()),repeats),Search.getText());
             
         } catch (RemoteException ex) {
             Logger.getLogger(Evaluate.class.getName()).log(Level.SEVERE, null, ex);
